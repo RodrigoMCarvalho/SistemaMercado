@@ -84,7 +84,7 @@ public class ProdutoDAO {
         } catch (SQLException ex) {
             System.err.println("Erro: " + ex);
         } finally {
-            ConnectionFactory.closeConncetion(conexao, stmt);
+            ConnectionFactory.closeConncetion(conexao, stmt); //fecha conexão
         }
 
     }

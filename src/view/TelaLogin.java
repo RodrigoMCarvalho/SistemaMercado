@@ -3,6 +3,7 @@ package view;
 import javax.swing.JOptionPane;
 import connection.ConnectionFactory;
 import java.sql.*;
+import model.dao.UsuarioDAO;
 
 /**
  *
@@ -20,25 +21,25 @@ public class TelaLogin extends javax.swing.JFrame {
         conexao = ConnectionFactory.getConnection(); //chama o módulo conector
     }
 
-    public void logar() {
-        String sql = "SELECT * FROM usuario WHERE login=? AND senha=?";
-        try {
-            stmt = conexao.prepareStatement(sql);
-            stmt.setString(1, txtLogin.getText());
-            stmt.setString(2, txtSenha.getText());
-            rs = stmt.executeQuery();
-            if (rs.next()) {
-                TelaPrincipal main = new TelaPrincipal();
-                main.setVisible(true);
-                this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(null, "Usuário ou/e senha inválidos!");
-            }
-        } catch (SQLException ex) {
-            System.err.println("Erro: " + ex);;
-        }
-    }
-
+//    public void logar() {  ***Adcionada autenticação no UsuarioDAO ***
+//
+//        String sql = "SELECT * FROM usuario WHERE login=? AND senha=?";
+//        try {
+//            stmt = conexao.prepareStatement(sql);
+//            stmt.setString(1, txtLogin.getText());
+//            stmt.setString(2, txtSenha.getText());
+//            rs = stmt.executeQuery();
+//            if (rs.next()) {
+//                TelaPrincipal main = new TelaPrincipal();
+//                main.setVisible(true);
+//                this.dispose();
+//            } else {
+//                JOptionPane.showMessageDialog(null, "Usuário ou/e senha inválidos!");
+//            }
+//        } catch (SQLException ex) {
+//            System.err.println("Erro: " + ex);;
+//        }
+//    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -127,12 +128,15 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
 
-        logar();
+        //logar();
+        UsuarioDAO dao = new UsuarioDAO();
+        boolean check = dao.logar(txtLogin.getText(), txtSenha.getText());
+        if (check) {  // se a variável check retornar true, a tela login é fechada
+            this.dispose();
+        }
+
     }//GEN-LAST:event_btnEntrarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

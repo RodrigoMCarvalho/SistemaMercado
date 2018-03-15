@@ -25,9 +25,10 @@ public class TelaCadastroUsuario extends javax.swing.JInternalFrame {
     }
 
     //método para ao selecionar uma linha na tabela, os dados são preenchidos nos campos do formulário
-    //necessário adicionar o evento Mouseclicked na tabela
+    //necessário adicionar o evento Mouseclicked na tabela. Vide mais abaixo.
     private void setarDados() {
         int setar = jtbTabela.getSelectedRow();
+
         txtDesc.setText(jtbTabela.getModel().getValueAt(setar, 1).toString());
         txtQtd.setText(jtbTabela.getModel().getValueAt(setar, 2).toString());
         txtPreco.setText(jtbTabela.getModel().getValueAt(setar, 3).toString());
