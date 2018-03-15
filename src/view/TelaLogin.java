@@ -129,8 +129,9 @@ public class TelaLogin extends javax.swing.JFrame {
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
 
         //logar();
+        String senha = new String(txtSenha.getPassword()).trim(); //necessário para utilizar o getPassword
         UsuarioDAO dao = new UsuarioDAO();
-        boolean check = dao.logar(txtLogin.getText(), txtSenha.getText());
+        boolean check = dao.logar(txtLogin.getText(), senha);
         if (check) {  // se a variável check retornar true, a tela login é fechada
             this.dispose();
         }
